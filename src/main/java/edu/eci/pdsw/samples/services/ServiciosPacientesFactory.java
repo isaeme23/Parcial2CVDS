@@ -34,7 +34,6 @@ public class ServiciosPacientesFactory {
                 setClassPathResource("mybatis-config.xml");
                 bind(ServiciosPaciente.class).to(ServiciosPacienteImpl.class);
                 bind(DaoPaciente.class).to(MyBatisDAOPaciente.class);
-
             }
 
         }

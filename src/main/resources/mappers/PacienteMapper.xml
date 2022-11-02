@@ -14,11 +14,39 @@
 
     <select id="getPacientes" resultMap="PacienteResult">
         SELECT
-            p.id,
-            p.tipo_id,
-            p.fecha_nacimiento,
-            p.nombre
+            p.id AS id,
+            p.tipo_id AS tipo_id,
+            p.fecha_nacimiento AS fecha_nacimiento,
+            p.nombre as nombre
         FROM
-            PACIENTES as p
+            PACIENTES as p JOIN CONSULTAS as c ON
+                id = c.PACIENTES_id AND tipo_id = c.PACIENTES_Tipo_id
+    </select>
+
+    <resultMap type='Consulta' id='ResultConsulta'>
+        <id property='id' column='idCONSULTAS'/>
+        <result property='fechayHora' column='fecha_y_hora'/>
+        <result property='resumen' column='resumen'/>
+    </resultMap>
+
+    <resultMap type='Paciente' id='PacienteResultConsultasPorId'>
+        <id property='id' column='id'/>
+        <id property='tipo_id' column='tipo_id' typeHandler="org.apache.ibatis.type.EnumTypeHandler"/>
+        <result property='fechaNacimiento' column='fecha_nacimiento'/>
+        <result property='nombre' column='nombre'/>
+        <collection property="consutlas" ofType="Consulta" resultMap="ResultConsulta"/>
+    </resultMap>
+
+    <select id="getPacientesPorId" resultMap="PacienteResultConsultasPorId">
+        SELECT
+        p.id AS id,
+        p.tipo_id AS tipo_id,
+        p.fecha_nacimiento AS fecha_nacimiento,
+        p.nombre as nombre
+        FROM
+            PACIENTES as p JOIN CONSULTAS as c ON
+                p.id = c.PACIENTES_id AND p.tipo_id = c.PACIENTES_Tipo_id
+        WHERE
+                p.id = #{id} AND p.tipo_id = #{idType}
     </select>
 </mapper>

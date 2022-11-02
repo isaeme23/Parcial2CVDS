@@ -33,8 +33,12 @@ public class ServiciosPacienteImpl implements ServiciosPaciente {
     }
 
     @Override
-    public Paciente consultarPacientesPorId(int id, TipoIdentificacion tipoIdentificacion) throws ExcepcionServiciosSuscripciones {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Paciente getPacientesPorId(int id, TipoIdentificacion tipoIdentificacion) throws ExcepcionServiciosSuscripciones, PersistenceException {
+        try {
+            return daoPaciente.load(id, tipoIdentificacion);
+        } catch (Exception e){
+            throw new ExcepcionServiciosSuscripciones("Error de consulta", e);
+        }
     }
 
     @Override

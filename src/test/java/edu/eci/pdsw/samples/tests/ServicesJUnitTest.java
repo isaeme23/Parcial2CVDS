@@ -17,13 +17,11 @@
 package edu.eci.pdsw.samples.tests;
 
 import edu.eci.pdsw.samples.entities.Paciente;
-import edu.eci.pdsw.samples.entities.Consulta;
+import edu.eci.pdsw.samples.entities.TipoIdentificacion;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosSuscripciones;
 import edu.eci.pdsw.samples.services.ServiciosPacientesFactory;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 import java.util.List;
 
 import org.junit.After;
@@ -88,7 +86,42 @@ public class ServicesJUnitTest {
         //assert ...
         Assert.fail("Pruebas no implementadas aun...");
         
-    }    
+    }
+
+    @Test
+    public void Given_IdAndIdType_When_SearchById_Then_ShowPatientAndQuery() throws SQLException, ExcepcionServiciosSuscripciones{
+        Connection conn=getConnection();
+        Statement stmt=conn.createStatement();
+
+        stmt.execute("INSERT INTO `PACIENTES` (`id`, `tipo_id`, `nombre`, `fecha_nacimiento`) VALUES (9876,'TI','Carmen','1995-07-10')");
+        stmt.execute("INSERT INTO `CONSULTAS` (`idCONSULTAS`, `fecha_y_hora`, `resumen`, `PACIENTES_id`, `PACIENTES_tipo_id`) VALUES (1262218,'2001-01-01 00:00:00','Gracias',9876,'TI')");
+
+        conn.commit();
+        conn.close();
+
+        try{
+            Paciente p = ServiciosPacientesFactory.getInstance().getTestingForumServices().getPacientesPorId(9876, TipoIdentificacion.TI);
+            java.sql.Date date = new java.sql.Date(1995/7/10);
+            Paciente q = new Paciente(9876, TipoIdentificacion.TI, "Carmen", date);
+            Assert.assertEquals(q,p);
+        } catch(Exception e){
+            throw new ExcepcionServiciosSuscripciones(e);
+        }
+
+
+    }
+
+    @Test
+    public void Given_Nothing_When_QueryContagiousIllness_Then_ShowPatientsWithHepatitisOrThePox() throws SQLException, ExcepcionServiciosSuscripciones{
+        Connection conn=getConnection();
+        Statement stmt=conn.createStatement();
+
+        stmt.execute("INSERT INTO `PACIENTES` (`id`, `tipo_id`, `nombre`, `fecha_nacimiento`) VALUES (9876,'TI','Carmen','1995-07-10')");
+        stmt.execute("INSERT INTO `CONSULTAS` (`idCONSULTAS`, `fecha_y_hora`, `resumen`, `PACIENTES_id`, `PACIENTES_tipo_id`) VALUES (1262218,'2001-01-01 00:00:00','Gracias',9876,'TI')");
+
+        conn.commit();
+        conn.close();
+    }
     
 
 }

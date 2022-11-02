@@ -9,16 +9,15 @@
         <title></title>
     </h:head>
     <h:body>
-        <h1>TITULO</h1>
+        <h1>Consultas</h1>
         <h:form>
             <!--Por favor no cambiar el 'id':-->
-            <p:inputText id="identificacion_paciente"></p:inputText>
-            <p:selectOneMenu value="#{mb.tipoIdentificacion}" >
-                <f:selectItems value="#{mb.tiposIdentificacion}" />
+            <p:inputText id="identificacion_paciente" binding="#{input}"/>
+            <p:selectOneMenu value="#{mb.tipoIdentificacion}">
+                <f:selectItems value="#{mb.tiposIdentificacion}"/>
             </p:selectOneMenu>
             <!--Por favor no cambiar el 'value':-->
-            <p:commandButton value="Consultar"></p:commandButton>
+            <p:commandButton action="#{mb.getPacientePorId(entrada.value)}" update="consultas" value="Consultar"></p:commandButton>
         </h:form>
     </h:body>
 </html>
-

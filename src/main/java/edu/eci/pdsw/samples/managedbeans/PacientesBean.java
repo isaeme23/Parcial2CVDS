@@ -18,8 +18,11 @@ package edu.eci.pdsw.samples.managedbeans;
 
 import edu.eci.pdsw.samples.entities.Paciente;
 import edu.eci.pdsw.samples.entities.TipoIdentificacion;
+import edu.eci.pdsw.samples.persistence.mybatisimpl.mappers.PacienteMapper;
 import edu.eci.pdsw.samples.services.ExcepcionServiciosSuscripciones;
 import edu.eci.pdsw.samples.services.ServiciosPacientesFactory;
+
+import java.sql.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -33,6 +36,21 @@ import javax.faces.bean.SessionScoped;
 public class PacientesBean {
 
     TipoIdentificacion tipoIdentificacion = TipoIdentificacion.CC;
+    int id;
+
+    Paciente paciente;
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
 
     public void setTipoIdentificacion(TipoIdentificacion tipoIdentificacion) {
         this.tipoIdentificacion = tipoIdentificacion;
@@ -46,10 +64,17 @@ public class PacientesBean {
         try {
             return ServiciosPacientesFactory.getInstance().getForumsServices().consultarPacientes();
         } catch (ExcepcionServiciosSuscripciones ex) {
-            
             throw ex;
         }
-        
+    }
+
+    public void getPacientePorId(int id) throws Exception{
+        try{
+            paciente = ServiciosPacientesFactory.getInstance().getForumsServices().getPacientesPorId(id, tipoIdentificacion);
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     public TipoIdentificacion[] getTiposIdentificacion() {
