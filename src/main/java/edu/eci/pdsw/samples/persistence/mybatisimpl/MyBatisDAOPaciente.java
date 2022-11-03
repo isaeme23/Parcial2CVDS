@@ -38,9 +38,10 @@ public class MyBatisDAOPaciente implements DaoPaciente {
     @Override
     public Paciente load(int id, TipoIdentificacion tipoIdentificacion) throws PersistenceException {
         try{
+            System.out.println(id);
             return pacienteMapper.getPacientesPorId(id, tipoIdentificacion);
         } catch(Exception e){
-            throw new PersistenceException("Error al consultar paciente", e);
+            throw e;
         }
     }
 

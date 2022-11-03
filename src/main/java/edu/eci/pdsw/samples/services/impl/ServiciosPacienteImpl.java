@@ -35,9 +35,10 @@ public class ServiciosPacienteImpl implements ServiciosPaciente {
     @Override
     public Paciente getPacientesPorId(int id, TipoIdentificacion tipoIdentificacion) throws ExcepcionServiciosSuscripciones, PersistenceException {
         try {
+            System.out.println("print");
             return daoPaciente.load(id, tipoIdentificacion);
         } catch (Exception e){
-            throw new ExcepcionServiciosSuscripciones("Error de consulta", e);
+            throw e;
         }
     }
 

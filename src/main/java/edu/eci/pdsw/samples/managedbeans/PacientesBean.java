@@ -69,8 +69,10 @@ public class PacientesBean {
     }
 
     public void getPacientePorId(int id) throws Exception{
+        System.out.println("primero");
         try{
             paciente = ServiciosPacientesFactory.getInstance().getForumsServices().getPacientesPorId(id, tipoIdentificacion);
+            System.out.println("Consulta");
         } catch(Exception e){
             e.printStackTrace();
         }
