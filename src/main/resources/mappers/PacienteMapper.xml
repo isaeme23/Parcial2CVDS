@@ -55,4 +55,21 @@
         WHERE
                 p.id = #{id} AND p.tipo_id = #{idType}
     </select>
+
+    <select id="menoresContagiosos" resultMap="PacienteResultConsultasPorId">
+        SELECT
+        p.id AS id,
+        p.tipo_id AS tipo_id,
+        p.fecha_nacimiento AS fecha_nacimiento,
+        p.nombre AS nombre,
+        c.idCONSULTAS AS idCONSULTAS,
+        c.fecha_y_hora AS fecha_y_hora,
+        c.resumen AS resumen
+        FROM
+        PACIENTES as p JOIN CONSULTAS as c ON
+        p.id = c.PACIENTES_id
+        WHERE
+        (c.resumen LIKE "%hepatitis%" OR c.resumen LIKE "%varicela%") AND (TIMESTAMPDIFF(YEAR, p.fecha_nacimiento, CURDATE()) &lt; 18)
+    </select>
+
 </mapper>

@@ -39,6 +39,7 @@ public class PacientesBean {
     int id;
 
     Paciente paciente;
+    List<Paciente> menoresContagiosos;
 
     public void setId(int id) {
         this.id = id;
@@ -69,14 +70,19 @@ public class PacientesBean {
     }
 
     public void getPacientePorId(int id) throws Exception{
-        System.out.println("primero");
         try{
             paciente = ServiciosPacientesFactory.getInstance().getForumsServices().getPacientesPorId(id, tipoIdentificacion);
-            System.out.println("Consulta");
         } catch(Exception e){
             e.printStackTrace();
         }
+    }
 
+    public void consultarMenoresConEnfermedadContagiosa() throws Exception{
+        try{
+            menoresContagiosos = ServiciosPacientesFactory.getInstance().getForumsServices().consultarMenoresConEnfermedadContagiosa();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public TipoIdentificacion[] getTiposIdentificacion() {

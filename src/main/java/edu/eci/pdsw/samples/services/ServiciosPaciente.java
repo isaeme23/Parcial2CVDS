@@ -39,7 +39,7 @@ public interface ServiciosPaciente {
      * 'varicela'
      * @throws ExcepcionServiciosSuscripciones si se presenta otro problema en las capas inferiores.
      */
-    public List<Paciente> consultarMenoresConEnfermedadContagiosa() throws ExcepcionServiciosSuscripciones;
+    public List<Paciente> consultarMenoresConEnfermedadContagiosa() throws ExcepcionServiciosSuscripciones, PersistenceException;
     
 
 }

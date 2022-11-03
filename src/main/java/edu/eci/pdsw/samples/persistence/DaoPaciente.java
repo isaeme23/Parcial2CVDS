@@ -31,6 +31,8 @@ public interface DaoPaciente {
     public Paciente load(int id, TipoIdentificacion tipoIdentificacion) throws PersistenceException;
     
     public List<Paciente> loadAll() throws PersistenceException;
+
+    public List<Paciente> loadMenoresContagiosos() throws PersistenceException;
     
     public void save(Paciente e) throws PersistenceException;
     

@@ -46,6 +46,15 @@ public class MyBatisDAOPaciente implements DaoPaciente {
     }
 
     @Override
+    public List<Paciente> loadMenoresContagiosos() throws PersistenceException{
+        try{
+            return pacienteMapper.menoresContagiosos();
+        } catch(Exception e){
+            throw e;
+        }
+    }
+
+    @Override
     public List<Paciente> loadAll() throws PersistenceException {
         try{
             return pacienteMapper.getPacientes();

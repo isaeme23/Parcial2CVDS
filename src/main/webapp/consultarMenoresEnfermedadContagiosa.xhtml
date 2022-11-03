@@ -10,7 +10,18 @@
     <h:body>
         <h1>Consulta de menores que han padecido enfermedad contagiosa</h1>
         <h:form>
-
+            <p:commandButton action="#{mb.consultarMenoresConEnfermedadContagiosa()}" update="consultas" value="Consultar"/>
+            <p:dataTable id="consultas" var="Consulta" value="#{mb.getPaciente().getConsultas()}">
+                <p:column headerText="Numero de documento">
+                    <h:outputText value="#{Consulta.getId()}"/>
+                </p:column>
+                <p:column headerText="Tipo de documento">
+                    <h:outputText value="#{Consulta.getTipo_id()}"/>
+                </p:column>
+                <p:column headerText="Fecha de nacimiento">
+                    <h:outputText value="#{Consulta.getFechaNacimiento()}"/>
+                </p:column>
+                </p:dataTable>
         </h:form>
     </h:body>
 </html>
