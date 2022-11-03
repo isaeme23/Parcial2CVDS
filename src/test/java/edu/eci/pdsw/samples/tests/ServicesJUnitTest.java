@@ -71,6 +71,7 @@ public class ServicesJUnitTest {
         stmt.execute("INSERT INTO `PACIENTES` (`id`, `tipo_id`, `nombre`, `fecha_nacimiento`) VALUES (9876,'TI','Carmenzo','1995-07-10')");
         stmt.execute("INSERT INTO `CONSULTAS` (`idCONSULTAS`, `fecha_y_hora`, `resumen`, `PACIENTES_id`, `PACIENTES_tipo_id`) VALUES (1262218,'2001-01-01 00:00:00','Gracias',9876,'TI')");
 
+
         conn.commit();
         conn.close();
 	
@@ -90,11 +91,16 @@ public class ServicesJUnitTest {
 
     @Test
     public void Given_IdAndIdType_When_SearchById_Then_ShowPatientAndQuery() throws SQLException, ExcepcionServiciosSuscripciones{
+        clearDB();
         Connection conn=getConnection();
         Statement stmt=conn.createStatement();
 
-        stmt.execute("INSERT INTO `PACIENTES` (`id`, `tipo_id`, `nombre`, `fecha_nacimiento`) VALUES (9876,'TI','Carmen','1995-07-10')");
+        System.out.println("Conexion realizada");
+
+        stmt.execute("INSERT INTO `PACIENTES` (`id`, `tipo_id`, `nombre`, `fecha_nacimiento`) VALUES (9876,'TI','Carmenzo','1995-07-10')");
         stmt.execute("INSERT INTO `CONSULTAS` (`idCONSULTAS`, `fecha_y_hora`, `resumen`, `PACIENTES_id`, `PACIENTES_tipo_id`) VALUES (1262218,'2001-01-01 00:00:00','Gracias',9876,'TI')");
+
+        System.out.println("Ejecuta");
 
         conn.commit();
         conn.close();
@@ -102,7 +108,7 @@ public class ServicesJUnitTest {
         try{
             Paciente p = ServiciosPacientesFactory.getInstance().getTestingForumServices().getPacientesPorId(9876, TipoIdentificacion.TI);
             java.sql.Date date = new java.sql.Date(1995/7/10);
-            Paciente q = new Paciente(9876, TipoIdentificacion.TI, "Carmen", date);
+            Paciente q = new Paciente(9876, TipoIdentificacion.TI, "Carmenzo", date);
             Assert.assertEquals(q,p);
         } catch(Exception e){
             throw new ExcepcionServiciosSuscripciones(e);

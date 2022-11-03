@@ -42,7 +42,7 @@
         p.id AS id,
         p.tipo_id AS tipo_id,
         p.fecha_nacimiento AS fecha_nacimiento,
-        p.nombre as nombre
+        p.nombre AS nombre
         FROM
             PACIENTES as p JOIN CONSULTAS as c ON
                 p.id = c.PACIENTES_id AND p.tipo_id = c.PACIENTES_Tipo_id

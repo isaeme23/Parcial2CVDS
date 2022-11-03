@@ -66,7 +66,7 @@ public class ServiciosPacientesFactory {
         return instance;
     }
 
-    public static void main(String a[]) throws ExcepcionServiciosSuscripciones {
+    public static void main(String [] a) throws ExcepcionServiciosSuscripciones {
         System.out.println(ServiciosPacientesFactory.getInstance().getForumsServices().consultarPacientes());
     }
 
