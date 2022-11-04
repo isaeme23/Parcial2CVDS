@@ -41,6 +41,10 @@ public class PacientesBean {
     Paciente paciente;
     List<Paciente> menoresContagiosos;
 
+    public List<Paciente> getMenoresContagiosos() {
+        return menoresContagiosos;
+    }
+
     public void setId(int id) {
         this.id = id;
     }

@@ -63,6 +63,8 @@ Para cumplir con lo anterior, debemos hacer que se muestre el resultado de la co
 
 * Al ejecutar el servicio de Tomcat, podemos ver que consultando un id existente, nos muestra los datos requeridos en la tabla:
 
+![](img/20.png)
+
 3. Implemente la historia de usuario #2, agregando todo lo que haga falta en la capa de presentación, lógica y de persistencia. La vista debe implementarse en consultarMenoresEnfermedadContagiosa.xhtml.
 
 La historia de usuario #2 nos dice que:
@@ -100,3 +102,6 @@ La historia de usuario #2 nos dice que:
 * El archivo de consultarMenoresEnfermedadContagiosa.xhtml usara este metodo para mostrar los resultados de la busqueda, asi que lo incorporamos al archivo:
 
 ![](img/17.png)
+
+* Con el servicio de tomcat ejecutado, podemos ver el resultado de la consulta:
+![](img/19.png)

@@ -67,7 +67,7 @@
         c.resumen AS resumen
         FROM
         PACIENTES as p JOIN CONSULTAS as c ON
-        p.id = c.PACIENTES_id
+        p.id = c.PACIENTES_id AND p.tipo_id = c.PACIENTES_Tipo_id
         WHERE
         (c.resumen LIKE "%hepatitis%" OR c.resumen LIKE "%varicela%") AND (TIMESTAMPDIFF(YEAR, p.fecha_nacimiento, CURDATE()) &lt; 18)
     </select>
